@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gül Dünyası</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <!-- Header -->
@@ -15,6 +16,7 @@
                 <li><a href="#home">Ana Səhifə</a></li>
                 <li><a href="#about">Haqqımızda</a></li>
                 <li><a href="#contact">Əlaqə</a></li>
+                <li><a href="#" id="admin-link">Admin Paneli</a></li>
             </ul>
         </nav>
     </header>
@@ -35,8 +37,66 @@
         </div>
     </section>
 
+        <!-- Admin Panel -->
+        <div id="admin-panel" style="display: none;">
+            <h2>Admin Paneli</h2>
+            <form id="login-form">
+                <input type="text" id="username" placeholder="Kullanıcı Adı" required>
+                <input type="password" id="password" placeholder="Şifre" required>
+                <button type="submit">Giriş Yap</button>
+            </form>
+            <div id="panel-content" style="display: none;">
+                <h3>Gül Resimleri Yükle</h3>
+                <form id="upload-form" action="upload.php" method="post" enctype="multipart/form-data">
+                    <input type="file" name="flower-image" accept="image/*" required>
+                    <input type="text" name="flower-name" placeholder="Gül adı" required>
+                    <input type="number" name="flower-price" placeholder="Qiymət" required>
+                    <textarea name="flower-description" placeholder="Təsvir" required></textarea>
+                    <button type="submit">Əlavə et</button>
+                </form>
+            </div>
+        </div>
+    
+<!-- Admin Linki -->
+<script>
+    // Admin linkine tıklandığında login formunu açar
+    document.getElementById('admin-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('admin-panel').style.display = 'block';
+    });
+
+    // Admin giriş işlemi
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Basit kullanıcı adı ve şifre kontrolü
+        if (username === 'admin' && password === '1234') {
+            document.getElementById('panel-content').style.display = 'block';
+            document.getElementById('login-form').style.display = 'none';
+        } else {
+            alert('Geçersiz giriş!');
+        }
+    });
+
+    // Gül resmi yükleme işlemi
+    document.getElementById('upload-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const flowerImage = document.getElementById('flower-image').files[0];
+        const flowerName = document.getElementById('flower-name').value;
+        const flowerPrice = document.getElementById('flower-price').value;
+        const flowerDescription = document.getElementById('flower-description').value;
+
+        // Burada yükleme işlemini yapabiliriz (Örneğin veritabanına kaydedebiliriz)
+        alert(`Gül Yüklendi: ${flowerName}, Fiyat: ${flowerPrice}`);
+    });
+</script>
+
     <!-- Products -->
-    <section class="container">
+    <section class="container" id="products">
         <div class="flower-card">
             <img src="rose1.jpg" alt="Qırmızı Gül">
             <h2>Qırmızı Gül</h2>
@@ -72,6 +132,7 @@
         <form>
             <input type="text" placeholder="Adınız" required>
             <input type="email" placeholder="Email" required>
+            <input type="tel" placeholder="Telefon (Nümunə: +99450XXXXXXX)" required>
             <textarea placeholder="Mesajınız" required></textarea>
             <button type="submit">Göndər</button>
         </form>
@@ -81,9 +142,9 @@
     <footer>
         <p>&copy; 2025 Gül Dünyası. Bütün hüquqlar qorunur.</p>
         <ul>
-            <li><a href="#">Facebook</a></li>
-            <li><a href="#">Instagram</a></li>
-            <li><a href="#">WhatsApp</a></li>
+            <li><a href="https://www.instagram.com/clara__flowers__">Instagram</a></li>
+            <li><a href="https://wa.me/+994504373259">WhatsApp</a></li>
+            <li><a href="https://www.tiktok.com/@clara_flowers_?_t=ZS-8tzoPYPSYK1&_r=1">TikTok</a></li>
         </ul>
     </footer>
 </body>

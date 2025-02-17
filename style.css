@@ -1,8 +1,10 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #fce4ec;
+    overflow-x: hidden;
 }
 
 header {
@@ -28,14 +30,17 @@ nav ul li a {
 }
 
 .slider {
-    display: flex;
+    position: relative;
+    height: 400px;
     overflow: hidden;
 }
 
 .slide {
-    min-width: 100%;
-    transition: 0.5s;
-    position: relative;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
 }
 
 .slide img {
@@ -144,4 +149,31 @@ footer ul {
 footer ul li a {
     color: white;
     text-decoration: none;
+}
+
+/* Admin Panel Styles */
+#admin-panel {
+    padding: 20px;
+    background: #f8f8f8;
+    display: none;
+}
+
+#admin-panel form input, #admin-panel form textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#admin-panel form button {
+    background-color: #e91e63;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#admin-panel form button:hover {
+    background-color: #c2185b;
 }
