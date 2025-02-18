@@ -301,37 +301,76 @@
             }
         }
 
-        .special-note {
-            background: #f8f8f8;
-            padding: 10px 0;
-            text-align: center;
-            border-bottom: 1px solid #eee;
+        html {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --header-bg: #ffffff;
+            --card-bg: #ffffff;
+            --border-color: #eeeeee;
+            --shadow-color: rgba(0,0,0,0.1);
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .special-note p {
-            margin: 0;
-            color: #333;
-            font-size: 15px;
+        html[data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #ffffff;
+            --header-bg: #242424;
+            --card-bg: #2d2d2d;
+            --border-color: #404040;
+            --shadow-color: rgba(255,255,255,0.05);
         }
 
-        .special-note a {
-            color: #25D366;
-            text-decoration: none;
-            font-weight: 500;
+        /* Theme Switch Stili */
+        .theme-toggle {
+            width: 52px;
+            height: 24px;
+            border-radius: 50px;
+            background: #e9e9e9;
+            border: none;
+            padding: 0;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
             transition: all 0.3s ease;
+            outline: none;
         }
 
-        .special-note a:hover {
-            color: #128C7E;
+        [data-theme="dark"] .theme-toggle {
+            background: #365669;
         }
 
-        .special-note i {
-            margin-right: 4px;
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #fff;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
+        [data-theme="dark"] .theme-toggle::before {
+            left: 30px;
+            background: #ffd43b;
+        }
+
+        /* Mobil için ince ayar */
         @media (max-width: 768px) {
-            .special-note p {
-                font-size: 14px;
+            .theme-toggle {
+                width: 46px;
+                height: 22px;
+            }
+            
+            .theme-toggle::before {
+                width: 18px;
+                height: 18px;
+            }
+            
+            [data-theme="dark"] .theme-toggle::before {
+                left: 26px;
             }
         }
     </style>
@@ -363,15 +402,11 @@
                 <div class="social-links">
                     <a href="https://wa.me/994504373259" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i></a>
                     <a href="https://www.tiktok.com/@clara_flowers_" target="_blank" class="social-icon"><i class="fab fa-tiktok"></i></a>
-                    <a href="https://www.instagram.com/clara__flowers__/" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/claraflowers_" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
                 </div>
             </nav>
         </div>
     </header>
-
-    <div class="special-note">
-        <p>🌹 Xüsusi gül dizaynı istəyirsiniz? <a href="https://wa.me/994504373259"><i class="fab fa-whatsapp"></i> WhatsApp</a> ilə əlaqə saxlayın</p>
-    </div>
 
     <section class="hero">
         <div class="container">
@@ -584,6 +619,20 @@ Qiymət: ${selectedProduct.price} AZN
         document.getElementById('searchInput').addEventListener('keyup', searchProducts);
 
         window.onload = function() {
+            // Tema kontrolü
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                themeToggle.innerHTML = savedTheme === 'dark' 
+                    ? '<i class="fas fa-sun"></i>' 
+                    : '<i class="fas fa-moon"></i>';
+            } else if (prefersDarkScheme.matches) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+            updateDate();
+
+            // Orijinal loading işlemleri
             showLoading();
             setTimeout(() => {
                 hideLoading();
@@ -592,6 +641,35 @@ Qiymət: ${selectedProduct.price} AZN
         }
 
         setInterval(showProducts, 5000);
+
+        // Tarih formatı
+        function updateDate() {
+            const months = ["Yanvar", "Fevral", "Mart", "Aprel", "May", "İyun", "İyul", "Avqust", "Sentyabr", "Oktyabr", "Noyabr", "Dekabr"];
+            const date = new Date();
+            const day = date.getDate();
+            const month = months[date.getMonth()];
+            const year = date.getFullYear();
+            document.getElementById('currentDate').textContent = `${day} ${month} ${year}`;
+        }
+
+        // Tema değiştirici
+        const themeToggle = document.getElementById('themeToggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            
+            // İkon değiştir
+            themeToggle.innerHTML = newTheme === 'dark' 
+                ? '<i class="fas fa-sun"></i>' 
+                : '<i class="fas fa-moon"></i>';
+            
+            localStorage.setItem('theme', newTheme);
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
     </script>
 </body>
 </html>
