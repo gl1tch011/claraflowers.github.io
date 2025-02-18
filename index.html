@@ -7,6 +7,137 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Məhsullar üçün əlavə stillər */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .product-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            background: white;
+            width: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .product-name {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .product-price {
+            color: #f34f3f;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .order-btn {
+            width: 100%;
+            padding: 10px;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .platform-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .platform-buttons button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .platform-buttons button:first-child {
+            background: #25D366;
+            color: white;
+        }
+
+        .platform-buttons button:last-child {
+            background: #E1306C;
+            color: white;
+        }
+
+        /* Mobil responsive üçün media queries */
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .product-image {
+                height: 150px;
+            }
+
+            .product-name {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-card {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -61,37 +192,141 @@
 
     <section class="products">
         <div class="container">
+            <!-- LocalStorage-dən gələn məhsullar -->
+            <div class="product-grid" id="productGrid"></div>
+            
+            <!-- Statik məhsullar -->
             <div class="product-grid">
                 <div class="product-card">
                     <img src="gul1.jpg" alt="Qızıl Gül" class="product-image">
                     <div class="product-info">
-                        <h3 class="product-title">Qızıl Gül</h3>
+                        <h3 class="product-name">Qızıl Gül</h3>
                         <p class="product-price">10 AZN</p>
+                        <button class="order-btn" onclick="startOrder('Qızıl Gül', 10)">
+                            <i class="fas fa-shopping-cart"></i> Sifariş Et
+                        </button>
                     </div>
                 </div>
                 <div class="product-card">
                     <img src="rose2.jpg" alt="Ağ Gül" class="product-image">
                     <div class="product-info">
-                        <h3 class="product-title">Ağ Gül</h3>
+                        <h3 class="product-name">Ağ Gül</h3>
                         <p class="product-price">15 AZN</p>
+                        <button class="order-btn" onclick="startOrder('Ağ Gül', 15)">
+                            <i class="fas fa-shopping-cart"></i> Sifariş Et
+                        </button>
                     </div>
                 </div>
                 <div class="product-card">
                     <img src="rose3.jpg" alt="Çəhrayı Gül" class="product-image">
                     <div class="product-info">
-                        <h3 class="product-title">Çəhrayı Gül</h3>
+                        <h3 class="product-name">Çəhrayı Gül</h3>
                         <p class="product-price">12 AZN</p>
+                        <button class="order-btn" onclick="startOrder('Çəhrayı Gül', 12)">
+                            <i class="fas fa-shopping-cart"></i> Sifariş Et
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Sipariş Modal -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <h3>Sifariş et</h3>
+            <div class="order-form">
+                <label>Neçə ədəd?</label>
+                <input type="number" id="quantity" min="1" value="1">
+                
+                <label>Hansı platforma ilə əlaqə saxlamaq istəyirsiniz?</label>
+                <div class="platform-buttons">
+                    <button onclick="completeOrder('whatsapp')">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </button>
+                    <button onclick="completeOrder('instagram')">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Mobile menu toggle
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             document.querySelector('.main-menu').classList.toggle('active');
         });
+
+        let selectedProduct = null;
+
+        // Sipariş başlat
+        function startOrder(name, price) {
+            selectedProduct = { name, price };
+            document.getElementById('orderModal').style.display = 'block';
+        }
+
+        // Siparişi tamamla
+        function completeOrder(platform) {
+            const quantity = document.getElementById('quantity').value;
+            const totalPrice = selectedProduct.price * quantity;
+            
+            let message = `🌸 Sifariş:
+${selectedProduct.name}
+${quantity} ədəd
+Qiymət: ${selectedProduct.price} AZN
+Ümumi məbləğ: ${totalPrice} AZN`;
+
+            let url = '';
+            
+            if (platform === 'whatsapp') {
+                url = `https://wa.me/994504373259?text=${encodeURIComponent(message)}`;
+            } else if (platform === 'instagram') {
+                url = 'https://instagram.com/claraflowers_';
+            }
+            
+            window.open(url, '_blank');
+            document.getElementById('orderModal').style.display = 'none';
+        }
+
+        // Modal dışına tıklandığında kapat
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('orderModal')) {
+                document.getElementById('orderModal').style.display = 'none';
+            }
+        }
+
+        // LocalStorage-dən məhsulları göstər
+        function showProducts() {
+            const products = JSON.parse(localStorage.getItem('products') || '[]');
+            const productGrid = document.getElementById('productGrid');
+            
+            if (products.length === 0) {
+                return;
+            }
+            
+            products.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            productGrid.innerHTML = products.map(product => `
+                <div class="product-card">
+                    <img src="${product.imageUrl}" alt="${product.name}" class="product-image" 
+                        onerror="this.onerror=null; this.src='default.jpg';">
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-price">${product.price} AZN</p>
+                        <button class="order-btn" onclick="startOrder('${product.name}', ${product.price})">
+                            <i class="fas fa-shopping-cart"></i> Sifariş Et
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Səhifə yükləndikdə məhsulları göstər
+        showProducts();
+
+        // Hər 5 saniyədə bir yenilə
+        setInterval(showProducts, 5000);
     </script>
 </body>
 </html>
