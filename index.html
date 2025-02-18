@@ -3,149 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gül Dünyası</title>
+    <title>Clara Flowers - Gül Mağazası</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
 </head>
 <body>
-    <!-- Header -->
     <header>
-        <h1>Gül Dünyası</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Ana Səhifə</a></li>
-                <li><a href="#about">Haqqımızda</a></li>
-                <li><a href="#contact">Əlaqə</a></li>
-                <li><a href="#" id="admin-link">Admin Paneli</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">CLARA FLOWERS</a>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="main-menu">
+                    <li><a href="#">ANA SƏHİFƏ</a></li>
+                    <li><a href="#">SƏHİFƏLƏR</a></li>
+                    <li><a href="#">MAĞAZA</a></li>
+                    <li><a href="#">PORTFOLIO</a></li>
+                    <li><a href="#">BLOQ</a></li>
+                    <li><a href="#">ELEMENTLƏR</a></li>
+                </ul>
+                <div class="social-links">
+                    <a href="https://wa.me/994504373259" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.tiktok.com/@clara_flowers_" target="_blank" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/claraflowers_" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
     </header>
 
-    <!-- Slider -->
-    <section class="slider" id="home">
-        <div class="slide">
-            <img src="rose1.jpg" alt="Qırmızı Gül">
-            <div class="caption">Romantik Qırmızı Güllər</div>
-        </div>
-        <div class="slide">
-            <img src="rose2.jpg" alt="Ağ Gül">
-            <div class="caption">Saflıq Rəmzi Ağ Güllər</div>
-        </div>
-        <div class="slide">
-            <img src="rose3.jpg" alt="Mavi Gül">
-            <div class="caption">Nadir Mavi Güllər</div>
+    <section class="hero">
+        <div class="container">
+            <h1>Gülləri <span>ürəkdən</span><br>göndərin.</h1>
+            <p>Güllər bizim ilham qaynağımızdır və unudulmaz xatirələr yaradırıq. Hər bir mərasim üçün güllərimiz xüsusi olacaq.</p>
         </div>
     </section>
 
-        <!-- Admin Panel -->
-        <div id="admin-panel" style="display: none;">
-            <h2>Admin Paneli</h2>
-            <form id="login-form">
-                <input type="text" id="username" placeholder="Kullanıcı Adı" required>
-                <input type="password" id="password" placeholder="Şifre" required>
-                <button type="submit">Giriş Yap</button>
-            </form>
-            <div id="panel-content" style="display: none;">
-                <h3>Gül Resimleri Yükle</h3>
-                <form id="upload-form" action="upload.php" method="post" enctype="multipart/form-data">
-                    <input type="file" name="flower-image" accept="image/*" required>
-                    <input type="text" name="flower-name" placeholder="Gül adı" required>
-                    <input type="number" name="flower-price" placeholder="Qiymət" required>
-                    <textarea name="flower-description" placeholder="Təsvir" required></textarea>
-                    <button type="submit">Əlavə et</button>
-                </form>
+    <section class="category-nav">
+        <div class="container">
+            <ul class="category-menu">
+                <li><a href="#">HAMI</a></li>
+                <li><a href="#">MƏŞHUR</a></li>
+                <li><a href="#">QIŞ</a></li>
+                <li><a href="#">MÜXTƏLİF</a></li>
+                <li><a href="#">EKZOTİK</a></li>
+                <li><a href="#">YAŞIL</a></li>
+                <li><a href="#">KAKTUSLAR</a></li>
+                <li><a href="#">FİLTR ▼</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="products">
+        <div class="container">
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="gul1.jpg" alt="Qızıl Gül" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Qızıl Gül</h3>
+                        <p class="product-price">10 AZN</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="rose2.jpg" alt="Ağ Gül" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Ağ Gül</h3>
+                        <p class="product-price">15 AZN</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="rose3.jpg" alt="Çəhrayı Gül" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Çəhrayı Gül</h3>
+                        <p class="product-price">12 AZN</p>
+                    </div>
+                </div>
             </div>
         </div>
-    
-<!-- Admin Linki -->
-<script>
-    // Admin linkine tıklandığında login formunu açar
-    document.getElementById('admin-link').addEventListener('click', function(e) {
-        e.preventDefault();
-        document.getElementById('admin-panel').style.display = 'block';
-    });
-
-    // Admin giriş işlemi
-    document.getElementById('login-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-
-        // Basit kullanıcı adı ve şifre kontrolü
-        if (username === 'admin' && password === '1234') {
-            document.getElementById('panel-content').style.display = 'block';
-            document.getElementById('login-form').style.display = 'none';
-        } else {
-            alert('Geçersiz giriş!');
-        }
-    });
-
-    // Gül resmi yükleme işlemi
-    document.getElementById('upload-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const flowerImage = document.getElementById('flower-image').files[0];
-        const flowerName = document.getElementById('flower-name').value;
-        const flowerPrice = document.getElementById('flower-price').value;
-        const flowerDescription = document.getElementById('flower-description').value;
-
-        // Burada yükleme işlemini yapabiliriz (Örneğin veritabanına kaydedebiliriz)
-        alert(`Gül Yüklendi: ${flowerName}, Fiyat: ${flowerPrice}`);
-    });
-</script>
-
-    <!-- Products -->
-    <section class="container" id="products">
-        <div class="flower-card">
-            <img src="rose1.jpg" alt="Qırmızı Gül">
-            <h2>Qırmızı Gül</h2>
-            <p>Romantik və xüsusi günlər üçün mükəmməl seçim.</p>
-            <span class="price">10 AZN</span>
-            <button>Sifariş et</button>
-        </div>
-        <div class="flower-card">
-            <img src="rose2.jpg" alt="Ağ Gül">
-            <h2>Ağ Gül</h2>
-            <p>Saflıq və sevginin rəmzi.</p>
-            <span class="price">12 AZN</span>
-            <button>Sifariş et</button>
-        </div>
-        <div class="flower-card">
-            <img src="rose3.jpg" alt="Mavi Gül">
-            <h2>Mavi Gül</h2>
-            <p>Nadir və gözəl bir seçim.</p>
-            <span class="price">15 AZN</span>
-            <button>Sifariş et</button>
-        </div>
     </section>
 
-    <!-- About Us -->
-    <section class="about" id="about">
-        <h2>Haqqımızda</h2>
-        <p>Gül Dünyası olaraq müştərilərimizə ən gözəl gülləri təqdim edirik. Keyfiyyət və məmnuniyyət bizim üçün önəmlidir.</p>
-    </section>
-
-    <!-- Contact Form -->
-    <section class="contact" id="contact">
-        <h2>Əlaqə</h2>
-        <form>
-            <input type="text" placeholder="Adınız" required>
-            <input type="email" placeholder="Email" required>
-            <input type="tel" placeholder="Telefon (Nümunə: +99450XXXXXXX)" required>
-            <textarea placeholder="Mesajınız" required></textarea>
-            <button type="submit">Göndər</button>
-        </form>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Gül Dünyası. Bütün hüquqlar qorunur.</p>
-        <ul>
-            <li><a href="https://www.instagram.com/clara__flowers__">Instagram</a></li>
-            <li><a href="https://wa.me/+994504373259">WhatsApp</a></li>
-            <li><a href="https://www.tiktok.com/@clara_flowers_?_t=ZS-8tzoPYPSYK1&_r=1">TikTok</a></li>
-        </ul>
-    </footer>
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.main-menu').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
