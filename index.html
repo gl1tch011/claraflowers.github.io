@@ -111,7 +111,7 @@
         .order-btn {
             width: 100%;
             padding: 10px;
-            background: #25D366;
+            background: #E1306C;
             color: white;
             border: none;
             border-radius: 8px;
@@ -122,7 +122,7 @@
         }
 
         .order-btn:hover {
-            background: #1ea952;
+            background: #c13584;
             transform: scale(1.05);
         }
 
@@ -196,9 +196,11 @@
             margin-top: 15px;
         }
 
-        .platform-buttons button {
-            flex: 1;
-            padding: 10px;
+        .instagram-btn {
+            width: 100%;
+            padding: 12px;
+            background: #E1306C;
+            color: white;
             border: none;
             border-radius: 8px;
             font-size: 16px;
@@ -206,18 +208,8 @@
             transition: all 0.3s ease;
         }
 
-        .platform-buttons button:hover {
-            transform: scale(1.05);
-        }
-
-        .platform-buttons button:first-child {
-            background: #25D366;
-            color: white;
-        }
-
-        .platform-buttons button:last-child {
-            background: #E1306C;
-            color: white;
+        .instagram-btn:hover {
+            background: #c13584;
         }
 
         /* Loading Animation */
@@ -301,76 +293,37 @@
             }
         }
 
-        html {
-            --bg-color: #ffffff;
-            --text-color: #333333;
-            --header-bg: #ffffff;
-            --card-bg: #ffffff;
-            --border-color: #eeeeee;
-            --shadow-color: rgba(0,0,0,0.1);
-            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        .special-note {
+            background: #f8f8f8;
+            padding: 10px 0;
+            text-align: center;
+            border-bottom: 1px solid #eee;
         }
 
-        html[data-theme="dark"] {
-            --bg-color: #1a1a1a;
-            --text-color: #ffffff;
-            --header-bg: #242424;
-            --card-bg: #2d2d2d;
-            --border-color: #404040;
-            --shadow-color: rgba(255,255,255,0.05);
+        .special-note p {
+            margin: 0;
+            color: #333;
+            font-size: 15px;
         }
 
-        /* Theme Switch Stili */
-        .theme-toggle {
-            width: 52px;
-            height: 24px;
-            border-radius: 50px;
-            background: #e9e9e9;
-            border: none;
-            padding: 0;
-            position: relative;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
+        .special-note a {
+            color: #25D366;
+            text-decoration: none;
+            font-weight: 500;
             transition: all 0.3s ease;
-            outline: none;
         }
 
-        [data-theme="dark"] .theme-toggle {
-            background: #365669;
+        .special-note a:hover {
+            color: #128C7E;
         }
 
-        .theme-toggle::before {
-            content: '';
-            position: absolute;
-            left: 2px;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #fff;
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        .special-note i {
+            margin-right: 4px;
         }
 
-        [data-theme="dark"] .theme-toggle::before {
-            left: 30px;
-            background: #ffd43b;
-        }
-
-        /* Mobil için ince ayar */
         @media (max-width: 768px) {
-            .theme-toggle {
-                width: 46px;
-                height: 22px;
-            }
-            
-            .theme-toggle::before {
-                width: 18px;
-                height: 18px;
-            }
-            
-            [data-theme="dark"] .theme-toggle::before {
-                left: 26px;
+            .special-note p {
+                font-size: 14px;
             }
         }
     </style>
@@ -400,13 +353,15 @@
                     <li><a href="#">ELEMENTLƏR</a></li>
                 </ul>
                 <div class="social-links">
-                    <a href="https://wa.me/994504373259" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://www.tiktok.com/@clara_flowers_" target="_blank" class="social-icon"><i class="fab fa-tiktok"></i></a>
-                    <a href="https://www.instagram.com/claraflowers_" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="https://instagram.com/clara__flowers__/" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
                 </div>
             </nav>
         </div>
     </header>
+
+    <div class="special-note">
+        <p>🌹 Xüsusi gül dizaynı istəyirsiniz? <a href="https://instagram.com/clara__flowers__/"><i class="fab fa-instagram"></i> Instagram</a> ilə əlaqə saxlayın</p>
+    </div>
 
     <section class="hero">
         <div class="container">
@@ -441,32 +396,111 @@
             <div class="product-grid" id="productGrid"></div>
             
             <div class="product-grid">
+                <!-- Rose 1 -->
                 <div class="product-card fade-in">
-                    <img src="gul1.jpg" alt="Qızıl Gül" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-name">Qızıl Gül</h3>
-                        <p class="product-price">25 AZN</p>
-                        <button class="order-btn" onclick="startOrder('Qızıl Gül', 25)">
-                            Sifariş Et
-                        </button>
+                    <div class="product-slider">
+                        <img src="rose1.jpg" alt="Qızıl Gül" class="product-image active">
+                        <img src="rose1part2.jpg" alt="Qızıl Gül" class="product-image">
                     </div>
-                </div>
-                <div class="product-card fade-in">
-                    <img src="rose2.jpg" alt="Ağ Gül" class="product-image">
                     <div class="product-info">
-                        <h3 class="product-name">Ağ Gül</h3>
+                        <h3 class="product-name">Premium Qızıl Gül</h3>
+                        <p class="product-description">Əl ilə seçilmiş premium qızılgüllər</p>
                         <p class="product-price">35 AZN</p>
-                        <button class="order-btn" onclick="startOrder('Ağ Gül', 35)">
+                        <button class="order-btn" onclick="startOrder('Premium Qızıl Gül', 35)">
                             Sifariş Et
                         </button>
                     </div>
                 </div>
+
+                <!-- Rose 2 -->
                 <div class="product-card fade-in">
-                    <img src="rose3.jpg" alt="Çəhrayı Gül" class="product-image">
+                    <div class="product-slider">
+                        <img src="rose2.jpg" alt="Klassik Qızıl Gül" class="product-image active">
+                        <img src="rose2part2.jpg" alt="Klassik Qızıl Gül" class="product-image">
+                    </div>
                     <div class="product-info">
-                        <h3 class="product-name">Çəhrayı Gül</h3>
-                        <p class="product-price">45 AZN</p>
-                        <button class="order-btn" onclick="startOrder('Çəhrayı Gül', 45)">
+                        <h3 class="product-name">Klassik Qızıl Gül</h3>
+                        <p class="product-description">Zərif və təravətli qızılgül buketi</p>
+                        <p class="product-price">22 AZN</p>
+                        <button class="order-btn" onclick="startOrder('Klassik Qızıl Gül', 22)">
+                            Sifariş Et
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Rose 3 -->
+                <div class="product-card fade-in">
+                    <img src="rose3.jpg" alt="Məxməri Qızıl Gül" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Məxməri Qızıl Gül</h3>
+                        <p class="product-description">Məxməri toxunuşlu qızılgüllər</p>
+                        <p class="product-price">30 AZN</p>
+                        <button class="order-btn" onclick="startOrder('Məxməri Qızıl Gül', 30)">
+                            Sifariş Et
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Rose 4 -->
+                <div class="product-card fade-in">
+                    <img src="rose4.jpg" alt="Zərif Qızıl Gül" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Zərif Qızıl Gül</h3>
+                        <p class="product-description">Xüsusi seçilmiş zərif qızılgüllər</p>
+                        <p class="product-price">25 AZN</p>
+                        <button class="order-btn" onclick="startOrder('Zərif Qızıl Gül', 25)">
+                            Sifariş Et
+                        </button>
+                    </div>
+                </div>
+
+                <!-- White -->
+                <div class="product-card fade-in">
+                    <img src="white1.jpg" alt="Ağ Gül" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Saf Ağ Gül</h3>
+                        <p class="product-description">Təmizliyin və saflığın rəmzi</p>
+                        <p class="product-price">35 AZN</p>
+                        <button class="order-btn" onclick="startOrder('Saf Ağ Gül', 35)">
+                            Sifariş Et
+                        </button>
+                    </div>
+                </div>
+
+                <!-- White+Green -->
+                <div class="product-card fade-in">
+                    <img src="whi+gre.jpg" alt="Ağ-Yaşıl Gül" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Ağ-Yaşıl Harmoniya</h3>
+                        <p class="product-description">Ağ gül və yaşıllıqların vəhdəti</p>
+                        <p class="product-price">53 AZN</p>
+                        <button class="order-btn" onclick="startOrder('Ağ-Yaşıl Harmoniya', 53)">
+                            Sifariş Et
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pink -->
+                <div class="product-card fade-in">
+                    <img src="pink1.jpg" alt="Çəhrayı Gül" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Nəfis Çəhrayı Gül</h3>
+                        <p class="product-description">Romantik çəhrayı gül buketi</p>
+                        <p class="product-price">40 AZN</p>
+                        <button class="order-btn" onclick="startOrder('Nəfis Çəhrayı Gül', 40)">
+                            Sifariş Et
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Little Blue -->
+                <div class="product-card fade-in">
+                    <img src="littleblue.jpg" alt="Mavi Gül" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Mini Mavi Gül</h3>
+                        <p class="product-description">Nadir və əsrarəngiz mavi gül</p>
+                        <p class="product-price">14 AZN</p>
+                        <button class="order-btn" onclick="startOrder('Mini Mavi Gül', 14)">
                             Sifariş Et
                         </button>
                     </div>
@@ -483,13 +517,9 @@
                 <label>Neçə ədəd?</label>
                 <input type="number" id="quantity" min="1" value="1">
                 
-                <label>Hansı platforma ilə əlaqə saxlamaq istəyirsiniz?</label>
                 <div class="platform-buttons">
-                    <button onclick="completeOrder('whatsapp')">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </button>
-                    <button onclick="completeOrder('instagram')">
-                        <i class="fab fa-instagram"></i> Instagram
+                    <button onclick="completeOrder()" class="instagram-btn">
+                        <i class="fab fa-instagram"></i> Instagram ilə Sifariş Et
                     </button>
                 </div>
             </div>
@@ -512,6 +542,42 @@
 
         let selectedProduct = null;
 
+        function initializeSliders() {
+            const sliders = document.querySelectorAll('.product-slider');
+            
+            sliders.forEach(slider => {
+                const images = slider.querySelectorAll('img');
+                let currentIndex = 0;
+                
+                setInterval(() => {
+                    images[currentIndex].classList.remove('active');
+                    currentIndex = (currentIndex + 1) % images.length;
+                    images[currentIndex].classList.add('active');
+                }, 3000);
+                
+                // Mobil için dokunma olayları
+                let touchStartX = 0;
+                slider.addEventListener('touchstart', e => {
+                    touchStartX = e.touches[0].clientX;
+                });
+                
+                slider.addEventListener('touchend', e => {
+                    const touchEndX = e.changedTouches[0].clientX;
+                    const diff = touchStartX - touchEndX;
+                    
+                    if (Math.abs(diff) > 50) {
+                        images[currentIndex].classList.remove('active');
+                        if (diff > 0) {
+                            currentIndex = (currentIndex + 1) % images.length;
+                        } else {
+                            currentIndex = (currentIndex - 1 + images.length) % images.length;
+                        }
+                        images[currentIndex].classList.add('active');
+                    }
+                });
+            });
+        }
+
         function showLoading() {
             document.getElementById('loadingOverlay').style.display = 'flex';
         }
@@ -529,28 +595,11 @@
             }, 1000);
         }
 
-        function completeOrder(platform) {
+        function completeOrder() {
             showLoading();
-            const quantity = document.getElementById('quantity').value;
-            const totalPrice = selectedProduct.price * quantity;
-            
-            let message = `🌸 Sifariş:
-${selectedProduct.name}
-${quantity} ədəd
-Qiymət: ${selectedProduct.price} AZN
-Ümumi məbləğ: ${totalPrice} AZN`;
-
             setTimeout(() => {
                 hideLoading();
-                let url = '';
-                
-                if (platform === 'whatsapp') {
-                    url = `https://wa.me/994504373259?text=${encodeURIComponent(message)}`;
-                } else if (platform === 'instagram') {
-                    url = 'https://instagram.com/claraflowers_';
-                }
-                
-                window.open(url, '_blank');
+                window.location.href = 'https://instagram.com/clara__flowers__/';
                 document.getElementById('orderModal').style.display = 'none';
             }, 800);
         }
@@ -618,58 +667,8 @@ Qiymət: ${selectedProduct.price} AZN
 
         document.getElementById('searchInput').addEventListener('keyup', searchProducts);
 
-        window.onload = function() {
-            // Tema kontrolü
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                document.documentElement.setAttribute('data-theme', savedTheme);
-                themeToggle.innerHTML = savedTheme === 'dark' 
-                    ? '<i class="fas fa-sun"></i>' 
-                    : '<i class="fas fa-moon"></i>';
-            } else if (prefersDarkScheme.matches) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-            }
-            updateDate();
-
-            // Orijinal loading işlemleri
-            showLoading();
-            setTimeout(() => {
-                hideLoading();
-                showProducts();
-            }, 1000);
-        }
-
-        setInterval(showProducts, 5000);
-
-        // Tarih formatı
-        function updateDate() {
-            const months = ["Yanvar", "Fevral", "Mart", "Aprel", "May", "İyun", "İyul", "Avqust", "Sentyabr", "Oktyabr", "Noyabr", "Dekabr"];
-            const date = new Date();
-            const day = date.getDate();
-            const month = months[date.getMonth()];
-            const year = date.getFullYear();
-            document.getElementById('currentDate').textContent = `${day} ${month} ${year}`;
-        }
-
-        // Tema değiştirici
-        const themeToggle = document.getElementById('themeToggle');
-        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            
-            // İkon değiştir
-            themeToggle.innerHTML = newTheme === 'dark' 
-                ? '<i class="fas fa-sun"></i>' 
-                : '<i class="fas fa-moon"></i>';
-            
-            localStorage.setItem('theme', newTheme);
-        }
-
-        themeToggle.addEventListener('click', toggleTheme);
+        window.addEventListener('load', initializeSliders);
     </script>
 </body>
 </html>
+>
