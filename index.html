@@ -22,7 +22,7 @@
             border-radius: 8px;
             padding: 15px;
             text-align: center;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
             background: white;
             width: 100%;
         }
@@ -61,6 +61,12 @@
             margin-top: 10px;
             cursor: pointer;
             font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .order-btn:hover {
+            background: #1ea952;
+            transform: scale(1.05);
         }
 
         .modal {
@@ -99,6 +105,11 @@
             border-radius: 8px;
             font-size: 16px;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .platform-buttons button:hover {
+            transform: scale(1.05);
         }
 
         .platform-buttons button:first-child {
@@ -109,6 +120,51 @@
         .platform-buttons button:last-child {
             background: #E1306C;
             color: white;
+        }
+
+        /* Yükleniyor animasyonu için stiller */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loading-spinner {
+            text-align: center;
+        }
+
+        .loading-spinner i {
+            color: #f34f3f;
+            font-size: 50px;
+            animation: spin 1s infinite linear;
+        }
+
+        .loading-text {
+            margin-top: 10px;
+            color: #333;
+            font-size: 16px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Fade-in animasyonu */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* Mobil responsive üçün media queries */
@@ -197,7 +253,7 @@
             
             <!-- Statik məhsullar -->
             <div class="product-grid">
-                <div class="product-card">
+                <div class="product-card fade-in">
                     <img src="gul1.jpg" alt="Qızıl Gül" class="product-image">
                     <div class="product-info">
                         <h3 class="product-name">Qızıl Gül</h3>
@@ -207,7 +263,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="product-card">
+                <div class="product-card fade-in">
                     <img src="rose2.jpg" alt="Ağ Gül" class="product-image">
                     <div class="product-info">
                         <h3 class="product-name">Ağ Gül</h3>
@@ -217,7 +273,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="product-card">
+                <div class="product-card fade-in">
                     <img src="rose3.jpg" alt="Çəhrayı Gül" class="product-image">
                     <div class="product-info">
                         <h3 class="product-name">Çəhrayı Gül</h3>
@@ -233,7 +289,7 @@
 
     <!-- Sipariş Modal -->
     <div id="orderModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content fade-in">
             <h3>Sifariş et</h3>
             <div class="order-form">
                 <label>Neçə ədəd?</label>
@@ -252,6 +308,14 @@
         </div>
     </div>
 
+    <!-- Yükleniyor Animasyonu -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner"></i>
+            <div class="loading-text">Yüklənir...</div>
+        </div>
+    </div>
+
     <script>
         // Mobile menu toggle
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
@@ -260,14 +324,28 @@
 
         let selectedProduct = null;
 
+        // Yükleniyor animasyonunu göster/gizle
+        function showLoading() {
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }
+
         // Sipariş başlat
         function startOrder(name, price) {
-            selectedProduct = { name, price };
-            document.getElementById('orderModal').style.display = 'block';
+            showLoading();
+            setTimeout(() => {
+                hideLoading();
+                selectedProduct = { name, price };
+                document.getElementById('orderModal').style.display = 'block';
+            }, 1000);
         }
 
         // Siparişi tamamla
         function completeOrder(platform) {
+            showLoading();
             const quantity = document.getElementById('quantity').value;
             const totalPrice = selectedProduct.price * quantity;
             
@@ -277,16 +355,19 @@ ${quantity} ədəd
 Qiymət: ${selectedProduct.price} AZN
 Ümumi məbləğ: ${totalPrice} AZN`;
 
-            let url = '';
-            
-            if (platform === 'whatsapp') {
-                url = `https://wa.me/994504373259?text=${encodeURIComponent(message)}`;
-            } else if (platform === 'instagram') {
-                url = 'https://instagram.com/claraflowers_';
-            }
-            
-            window.open(url, '_blank');
-            document.getElementById('orderModal').style.display = 'none';
+            setTimeout(() => {
+                hideLoading();
+                let url = '';
+                
+                if (platform === 'whatsapp') {
+                    url = `https://wa.me/994504373259?text=${encodeURIComponent(message)}`;
+                } else if (platform === 'instagram') {
+                    url = 'https://instagram.com/claraflowers_';
+                }
+                
+                window.open(url, '_blank');
+                document.getElementById('orderModal').style.display = 'none';
+            }, 800);
         }
 
         // Modal dışına tıklandığında kapat
@@ -298,32 +379,44 @@ Qiymət: ${selectedProduct.price} AZN
 
         // LocalStorage-dən məhsulları göstər
         function showProducts() {
+            showLoading();
             const products = JSON.parse(localStorage.getItem('products') || '[]');
             const productGrid = document.getElementById('productGrid');
             
-            if (products.length === 0) {
-                return;
-            }
-            
-            products.sort((a, b) => new Date(b.date) - new Date(a.date));
+            setTimeout(() => {
+                if (products.length === 0) {
+                    hideLoading();
+                    return;
+                }
+                
+                products.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-            productGrid.innerHTML = products.map(product => `
-                <div class="product-card">
-                    <img src="${product.imageUrl}" alt="${product.name}" class="product-image" 
-                        onerror="this.onerror=null; this.src='default.jpg';">
-                    <div class="product-info">
-                        <h3 class="product-name">${product.name}</h3>
-                        <p class="product-price">${product.price} AZN</p>
-                        <button class="order-btn" onclick="startOrder('${product.name}', ${product.price})">
-                            <i class="fas fa-shopping-cart"></i> Sifariş Et
-                        </button>
+                productGrid.innerHTML = products.map(product => `
+                    <div class="product-card fade-in">
+                        <img src="${product.imageUrl}" alt="${product.name}" class="product-image" 
+                            onerror="this.onerror=null; this.src='default.jpg';">
+                        <div class="product-info">
+                            <h3 class="product-name">${product.name}</h3>
+                            <p class="product-price">${product.price} AZN</p>
+                            <button class="order-btn" onclick="startOrder('${product.name}', ${product.price})">
+                                <i class="fas fa-shopping-cart"></i> Sifariş Et
+                            </button>
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `).join('');
+                
+                hideLoading();
+            }, 500);
         }
 
-        // Səhifə yükləndikdə məhsulları göstər
-        showProducts();
+        // Sayfa yüklendiğinde
+        window.onload = function() {
+            showLoading();
+            setTimeout(() => {
+                hideLoading();
+                showProducts();
+            }, 1000);
+        }
 
         // Hər 5 saniyədə bir yenilə
         setInterval(showProducts, 5000);
